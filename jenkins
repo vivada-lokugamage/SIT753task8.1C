@@ -10,51 +10,57 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Fetch the source code from the directory path specified by the environment variable: ${DIRECTORY_PATH}"
-                echo "Compile the code and generate any necessary artefacts"
+                echo "Stage 1: Build"
+                echo "Tasks: Build the code using a build automation tool to compile and package the code"
+                echo "Tool: Maven - Build automation tool for Java projects"
             }
         }
-
-        stage('Test') {
+        
+        stage('Unit and Integration Tests') {
             steps {
-                echo "Unit tests"
-                echo "Integration tests"
+                echo "Stage 2: Unit and Integration Tests"
+                echo "Tasks: Run unit tests to ensure the code functions as expected and run integration tests to ensure the different components of the application work together as expected"
+                echo "Tools: JUnit (unit testing), TestNG (integration testing)"
             }
         }
-
-        stage('Code Quality Check') {
+        
+        stage('Code Analysis') {
             steps {
-                echo "Check the quality of the code"
+                echo "Stage 3: Code Analysis"
+                echo "Tasks: Integrate a code analysis tool to analyse the code and ensure it meets industry standards"
+                echo "Tool: SonarQube - Comprehensive code quality and security analysis platform"
             }
         }
-
-        stage('Deploy') {
+        
+        stage('Security Scan') {
             steps {
-                echo "Deploy the application to a testing environment specified by the environment variable: ${TESTING_ENVIRONMENT}"
+                echo "Stage 4: Security Scan"
+                echo "Tasks: Perform a security scan on the code to identify any vulnerabilities"
+                echo "Tool: OWASP Dependency Check - Security scanning tool for identifying vulnerabilities in dependencies"
             }
         }
-
-        stage('Approval') {
+        
+        stage('Deploy to Staging') {
             steps {
-                echo "Waiting for approval.."
-                sleep (time: 10, unit: 'SECONDS')
+                echo "Stage 5: Deploy to Staging"
+                echo "Tasks: Deploy the application to a staging server"
+                echo "Tool: Ansible - Infrastructure as code tool for deploying to AWS EC2 instances"
             }
         }
-
+        
+        stage('Integration Tests on Staging') {
+            steps {
+                echo "Stage 6: Integration Tests on Staging"
+                echo "Tasks: Run integration tests on the staging environment to ensure the application functions as expected in a production-like environment"
+                echo "Tools: REST-assured (API testing), Selenium (UI testing)"
+            }
+        }
+        
         stage('Deploy to Production') {
             steps {
-                echo "Deploying the code to the production environment: ${PRODUCTION_ENVIRONMENT}"
-            }
-        }
-
-        stage('Complete') {
-            steps {
-                echo "Completed..."
-            }
-        }
-        stage('Commit') {
-            steps {
-                echo "Testing another new commit..."
+                echo "Stage 7: Deploy to Production"
+                echo "Tasks: Deploy the application to a production server"
+                echo "Tool: Ansible with AWS plugins - For deploying to production AWS EC2 instances"
             }
         }
     }
