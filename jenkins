@@ -63,11 +63,6 @@ pipeline {
                 echo "Tool: Ansible with AWS plugins - For deploying to production AWS EC2 instances"
             }
         }
-        stage('Complete') {
-            steps {
-                echo "Completed..."
-            }
-        }
     }
     post {
         success {
